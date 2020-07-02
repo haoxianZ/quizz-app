@@ -27,3 +27,38 @@ options: ['Kiev', 'A','B','c']
 }
 ];
 
+
+// a function to render the question and options
+function createQuestion(){
+    console.log('create a form')
+};
+//a function to handle the start button
+function startQuizz(){
+    console.log('start Quizz')
+};
+//a function to handle the click on option and check if is correct
+function submitOption(){
+    console.log('if is correct')
+
+};
+//a function to display message of correct of not 
+
+// function that moves to next question after they click next & choose
+function nextQuestion(){
+    console.log('nextQuestion ran')
+};
+//a function to keep track of how many q left and their score
+// a function for restart at the end
+function restart(){
+    console.log('restart')
+};
+// a function that runs the function and $ call back
+function quizzApp(){
+    startQuizz()
+    createQuestion()
+    submitOption()
+    nextQuestion()
+    restart()
+};
+
+$(quizzApp)
