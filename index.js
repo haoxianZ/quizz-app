@@ -26,7 +26,7 @@ answer: 'Kyiv',
 options: ['Kharkiv', 'Odesa','Kyiv','Dnipro']
 }
 ];
-
+console.log(STORE[5].question)
 let questionId=0;
 let score = 0;
 //a function to handle the start button
@@ -62,30 +62,40 @@ function submitOption(questionIndex){
         console.log(STORE[questionIndex].options[choice]);
         let correctAnswer = STORE[questionIndex].answer;
         if (STORE[questionIndex].options[choice] == correctAnswer){
-            correct()
-            
-            $('.score').text(score)
+            correct();
+            $('.score').text(score);
+            $('.js-submit').hide();
+            nextQuestion();
         }
-        if (!choice) {$('.js-correctOrnot').html('Please select an option')}
-        else if (STORE[questionIndex].options[choice] != correctAnswer) {incorrect(correctAnswer)}
+        if (!choice) {$('.js-correctOrNot').html('Please select an option')}
+        else if (STORE[questionIndex].options[choice] != correctAnswer) {
+            incorrect(correctAnswer);
+            nextQuestion();}
     })
 };
 
 
 // correct display
 function correct(){
-    $('.js-correctOrnot').html(`
+    $('.js-correctOrNot').html(`
+    <div class="js-next">
     <h3>Your answer is correct!</h3>
-    <button class="nextBtn button">Next</button>`)
+    <button class="nextBtn button">Next</button>
+</div>
+`)
     // updatescore 
     score++;
-
-}
+    
+};
 // incorrect display
 function incorrect(displayAnswer){
-    $('.js-correctOrnot').html(`
+    $('.js-correctOrNot').html(`
+    <div class="js-next">
     <h3>Your answer is incorrect! The correct answer is ${displayAnswer}</h3>
-    <button class="nextBtn button">Next</button>`)
+    <button class="nextBtn button">Next</button>
+</div>
+`)
+    
 }
 
 // a function to render the question and options, creating a form
@@ -117,41 +127,43 @@ function renderQuestion(questionIndex){
     
     createOptions(questionIndex);
     submitOption(questionIndex);
-   
-
-
 };
 
  
 
 // function that moves to next question after they click next & choose
 function nextQuestion(){
-    
-    $('.button').on('click', function(event) {
+    $('.js-next').on('click', '.nextBtn', event => {
         console.log('nextQuestion ran')
-        
-        
-        if(questionId<STORE.length){
+        $('.js-next').hide();
+        lastQuestion = STORE.length -1;
+        if(questionId<lastQuestion){
+            console.log('the if is running')
+            console.log(questionId, STORE.length)
             questionId++;//add to questionId
             $('.questionNumber').text(questionId)
             renderQuestion(questionId);
         }
-        else{
-            $('js-lastPage').html(`<h2>You score is {} </h2>
+        else {
+            console.log('the else is runing ')
+            $('.js-correctOrNot').hide();
+            $('.js-lastPage').html(`<h2>Your score is ${score} </h2>
             <div class="restartButton">
                 <button type= "submit" class=" js-restart" >Restart</button>
             </div>
             `)
-        }
+        };
         
-})
+});
 };
 //a function to keep track of how many q left and their score
 
 // a function for restart at the end
 function restart(){
     console.log('restart')
-    $('.js-restart').on('click', function(event){
+    $('restartButton').on('click', '.js-restart', function(event){
+        let questionId=0;
+        let score = 0;
         startQuizz();
     })
     
@@ -159,8 +171,8 @@ function restart(){
 // a function that runs the function and $ call back
 function quizzApp(){
     startQuizz()
-    nextQuestion()
-    restart()
+    
+    
 };
 
 $(quizzApp)
