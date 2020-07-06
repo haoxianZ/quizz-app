@@ -14,10 +14,13 @@
     align-items: center;
     text-align: center;
     margin: auto;
-    padding: 1em;
-    border: 0.1em #371d0d solid;
+    padding: 10px;
+    border: none;
     background-color: #F9DAB4;
+    justify-content: space-evenly;
   }
+
+  
   .js-option{
     display: flex;
     flex-direction: column;
@@ -26,6 +29,7 @@
     margin: auto;
     justify-content: space-evenly;
   }
+  
   button, input[type="text"] {
     padding: 5px;
   }
@@ -36,12 +40,6 @@
 
   /* responsive layout do */
   @media all and (min-width: 600px){
-    .js-option{
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      text-align: center;
-      margin: auto;
-    }
+    
   
   }

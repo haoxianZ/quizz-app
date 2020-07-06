@@ -29,15 +29,6 @@ options: ['Kharkiv', 'Odesa','Kyiv','Dnipro']
 console.log(STORE[5].question)
 let questionId=0;
 let score = 0;
-//a function to handle the start button
-function startQuizz(){
-    console.log('start Quizz')
-    $('.js-start').on('click',event =>{
-        renderQuestion(0);
-        $('.js-start').hide();
-       
-    } )
-};
 
 //a function to create a list of option
 function createOptions(storeId){
@@ -45,7 +36,8 @@ function createOptions(storeId){
    for (i=0; i < STORE[storeId].options.length; i++) {
     $('.js-option').append(`
     <input type = "radio" name="options" id="${i+1}" value = "${i}"> 
-    <label for="option${i+1}"> ${STORE[storeId].options[i]}</label> 
+    <label for="option${i+1}"> ${STORE[storeId].options[i]}</label>
+    <br> 
 `);
    }
 }
@@ -67,7 +59,7 @@ function submitOption(questionIndex){
             $('.js-submit').hide();
             nextQuestion();
         }
-        if (!choice) {$('.js-correctOrNot').html('Please select an option')}
+        if (!choice) {$('.js-correctOrNot').html('Please select an option!')}
         else if (STORE[questionIndex].options[choice] != correctAnswer) {
             incorrect(correctAnswer);
             nextQuestion();}
@@ -105,15 +97,12 @@ function renderQuestion(questionIndex){
     let currentQuestion = STORE[questionIndex].question
     let currentOptions= STORE[questionIndex].options;
     const questionPage =  `<div>
-    <form id="js-question">
+    <form id="js-form">
         <fieldset>
-            <div>
+            <div class = "js-quest">
                 <legend>${currentQuestion}</legend>
             </div>
-            <div class = "css-options">
-                <div class = "js-option">
-                    
-                </div>
+            <div class = "js-option">
             </div>
             <div class="submitButton">
                 <button type= "submit" class=" js-submit" >Submit</button>
@@ -152,6 +141,7 @@ function nextQuestion(){
                 <button type= "submit" class=" js-restart" >Restart</button>
             </div>
             `)
+            restart();
         };
         
 });
@@ -161,18 +151,35 @@ function nextQuestion(){
 // a function for restart at the end
 function restart(){
     console.log('restart')
-    $('restartButton').on('click', '.js-restart', function(event){
-        let questionId=0;
-        let score = 0;
-        startQuizz();
+    $('.restartButton').on('click', '.js-restart', function(event){
+        console.log('restart is running')
+        window.location.href="index.html"
+
+
     })
     
 };
-// a function that runs the function and $ call back
-function quizzApp(){
-    startQuizz()
-    
-    
+//a function to display score and progress
+function displayScore(){
+    $('.js-start').hide();
+        $('.js-top').html(`
+        <ul>
+                    <li>Question:
+                        <span class="questionNumber">1</span>/6
+                    </li>
+                    <li> Score:
+                        <span class="score">0</span>
+                    </li>
+                </ul>`)
+}
+//a function to that starts the quizz
+function startQuizz(){
+    console.log('start Quizz')
+    $('.js-start').on('click',event =>{
+        renderQuestion(questionId);
+        displayScore();
+       
+    } )
 };
 
-$(quizzApp)
+$(startQuizz)
