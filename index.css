@@ -30,7 +30,7 @@
     justify-content: space-evenly;
   }
   
-  button, input[type="text"] {
+  button{
     padding: 5px;
   }
   

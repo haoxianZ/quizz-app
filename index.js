@@ -71,7 +71,8 @@ function submitOption(questionIndex){
 function correct(){
     $('.js-correctOrNot').html(`
     <div class="js-next">
-    <h3>Your answer is correct!</h3>
+    <div class="js-correct"> <h3>Your answer is correct!</h3>
+    <img src="congrat.jpg" alt="congradulation pic"></div>
     <button class="nextBtn button">Next</button>
 </div>
 `)
@@ -83,7 +84,8 @@ function correct(){
 function incorrect(displayAnswer){
     $('.js-correctOrNot').html(`
     <div class="js-next">
-    <h3>Your answer is incorrect! The correct answer is ${displayAnswer}</h3>
+    <div><h3>Your answer is incorrect! The correct answer is ${displayAnswer}</h3>
+    <img src="fail.jpg" alt="try again pic"></div>
     <button class="nextBtn button">Next</button>
 </div>
 `)
