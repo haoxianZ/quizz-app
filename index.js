@@ -1,7 +1,7 @@
 const STORE = [{
     question: 'The tallest building in the world is located in which city?'
     ,answer:'Dubai',
-    options: ['Dubai', 'A','B','c']
+    options: ['A','Dubai','B','c']
 },
 {
     question: 'Which year was the original Toy Story film released in the US?',
@@ -33,7 +33,7 @@ let questionId=0;
 function startQuizz(){
     console.log('start Quizz')
     $('.start').on('click',event =>{
-        renderQuestion(questionId);
+        renderQuestion(0);
     } )
 };
 
@@ -48,6 +48,38 @@ function createOptions(storeId){
    }
 }
 
+//a function to handle submit
+function submitOption(questionIndex){
+    
+    $('.js-submit').on('click', function(event) {
+        event.preventDefault();
+        console.log('if is correct')
+        let selected = $('input:checked');
+        let choice = selected.val();
+        
+        console.log(choice)
+        let correctAnswer = STORE[questionIndex].answer;
+        if (STORE[questionIndex].options[choice] == correctAnswer){
+            correct()
+        }
+        if (!choice) {$('.js-correctOrnot').html('Please select an option')}
+        else {incorrect(correctAnswer)}
+    })
+};
+
+// correct display
+function correct(){
+    $('.js-correctOrnot').html(`
+    <h3>Your answer is correct!</h3>
+    <button type="button" class="nextBtn button">Next</button>`)
+    // updatescore 
+}
+// incorrect display
+function incorrect(displayAnswer){
+    $('.js-correctOrnot').html(`
+    <h3>Your answer is incorrect! The correct answer is ${displayAnswer}</h3>
+    <button type="button" class="nextBtn button">Next</button>`)
+}
 
 // a function to render the question and options, creating a form
 function renderQuestion(questionIndex){
@@ -83,43 +115,14 @@ function renderQuestion(questionIndex){
 
 };
 
- // correct display
-function correct(){
-    $('.js-correctOrnot').html(`
-    <h3>Your answer is correct!</h3>
-    <button type="button" class="nextBtn button">Next</button>`)
-    // updatescore 
-}
-// incorrect display
-function incorrect(){
-    $('.js-correctOrnot').html(`
-    <h3>Your answer is incorrect!</h3>
-    <button type="button" class="nextButton button">Next</button>`)
-}
-//a function to handle submit
-function submitOption(questionIndex){
-    
-    $('.js-submit').on('click', function(event) {
-        event.preventDefault();
-        console.log('if is correct')
-        let selected = $('input:checked');
-        let choice = selected.val();
-        
-        console.log(choice)
-        let correctAnswer = STORE[questionIndex].answer;
-        if (STORE[questionIndex].options[choice] == correctAnswer){
-            correct()
-        }
-        else {incorrect()}
-    })
-};
+ //
 
 // function that moves to next question after they click next & choose
 function nextQuestion(){
     console.log('nextQuestion ran')
     $('.nextBtn').on('click', event =>{
         if(questionId<STORE.length){
-            questionId = questionId +1;//add to questionId
+            questionId++;//add to questionId
             renderQuestion(questionId);
         }
         else{
