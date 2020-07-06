@@ -106,7 +106,7 @@ function renderQuestion(questionIndex){
             </div>
             <div class = "js-option">
             </div>
-            <div class="submitButton">
+            <div>
                 <button type= "submit" class=" js-submit" >Submit</button>
             </div>
         </fieldset>
