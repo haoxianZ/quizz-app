@@ -31,7 +31,12 @@
   }
   
   button{
-    padding: 5px;
+    margin: auto;
+    color:#E2EEFD ;
+    cursor: pointer;
+    font-family: 'Gaegu', cursive;
+    text-transform: uppercase;
+    background-color: #662443; 
   }
   
   button:hover {
@@ -40,6 +45,18 @@
 
   /* responsive layout do */
   @media all and (min-width: 600px){
-    
+    button {
+      margin-top: 5px;
+      font-size: 20px;
+    }
+    input[type=radio] {
+      border: 0px;
+      width: 100%;
+      height: 20px;
+    }
+    #js-form, .js-next{
+      font-size: larger;
+    }
+
   
   }
