@@ -1,11 +1,31 @@
 * {
     box-sizing: border-box;
   }
-  
+  header {
+    text-align: center;
+    background: url(city.jpg) ;
+  }
   body {
     font-family: 'Roboto', sans-serif;
   }
-  
+  section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    padding: 1em;
+    border: 0.1em #371d0d solid;
+    background-color: #ffd700;
+  }
+  .js-option{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    justify-content: space-evenly;
+  }
   button, input[type="text"] {
     padding: 5px;
   }
@@ -13,4 +33,15 @@
   button:hover {
     cursor: pointer;
   }
+
+  /* responsive layout do */
+  @media all and (min-width: 600px){
+    .js-option{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      text-align: center;
+      margin: auto;
+    }
   
+  }
