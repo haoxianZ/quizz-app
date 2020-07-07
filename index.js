@@ -26,7 +26,6 @@ answer: 'Kyiv',
 options: ['Kharkiv', 'Odesa','Kyiv','Dnipro']
 }
 ];
-console.log(STORE[5].question)
 let questionId=0;
 let score = 0;
 
@@ -47,11 +46,8 @@ function submitOption(questionIndex){
     
     $('.js-submit').on('click', function(event) {
         event.preventDefault();
-        console.log('if is correct')
         let selected = $('input:checked');
         let choice = selected.val();
-        
-        console.log(STORE[questionIndex].options[choice]);
         let correctAnswer = STORE[questionIndex].answer;
         if (STORE[questionIndex].options[choice] == correctAnswer){
             correct();
@@ -94,15 +90,13 @@ function incorrect(displayAnswer){
 
 // a function to render the question and options, creating a form
 function renderQuestion(questionIndex){
-    console.log('create a form')
-    
     let currentQuestion = STORE[questionIndex].question
     let currentOptions= STORE[questionIndex].options;
     const questionPage =  `<div>
     <form id="js-form">
         <fieldset>
+        <legend>${currentQuestion}</legend>
             <div class = "js-quest">
-                <legend>${currentQuestion}</legend>
             </div>
             <div class = "js-option">
             </div>
@@ -125,18 +119,14 @@ function renderQuestion(questionIndex){
 // function that moves to next question after they click next & choose
 function nextQuestion(){
     $('.js-next').on('click', '.nextBtn', event => {
-        console.log('nextQuestion ran')
         $('.js-next').hide();
         lastQuestion = STORE.length -1;
         if(questionId<lastQuestion){
-            console.log('the if is running')
-            console.log(questionId, STORE.length)
             questionId++;//add to questionId
             $('.questionNumber').text(questionId)
             renderQuestion(questionId);
         }
         else {
-            console.log('the else is runing ')
             $('.js-correctOrNot').hide();
             $('.js-lastPage').html(`<h2>Your score is ${score} </h2>
             <div class="restartButton">
@@ -152,12 +142,8 @@ function nextQuestion(){
 
 // a function for restart at the end
 function restart(){
-    console.log('restart')
     $('.restartButton').on('click', '.js-restart', function(event){
-        console.log('restart is running')
         window.location.href="index.html"
-
-
     })
     
 };
@@ -176,7 +162,6 @@ function displayScore(){
 }
 //a function to that starts the quizz
 function startQuizz(){
-    console.log('start Quizz')
     $('.js-start').on('click',event =>{
         renderQuestion(questionId);
         displayScore();
