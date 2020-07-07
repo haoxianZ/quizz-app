@@ -35,7 +35,7 @@ function createOptions(storeId){
 
    for (i=0; i < STORE[storeId].options.length; i++) {
     $('.js-option').append(`
-    <input type = "radio" name="options" id="${i+1}" value = "${i}"> 
+    <input type = "radio" name="options" id="option${i+1}" value = "${i}"> 
     <label for="option${i+1}"> ${STORE[storeId].options[i]}</label>
     <br> 
 `);
@@ -107,7 +107,7 @@ function renderQuestion(questionIndex){
             <div class = "js-option">
             </div>
             <div>
-                <button type= "submit" class=" js-submit" >Submit</button>
+                <button class=" js-submit" >Submit</button>
             </div>
         </fieldset>
     </form> 
@@ -140,7 +140,7 @@ function nextQuestion(){
             $('.js-correctOrNot').hide();
             $('.js-lastPage').html(`<h2>Your score is ${score} </h2>
             <div class="restartButton">
-                <button type= "submit" class=" js-restart" >Restart</button>
+                <button class=" js-restart" >Restart</button>
             </div>
             `)
             restart();
